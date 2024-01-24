@@ -1,0 +1,18 @@
+ public static void plusMinus(List<Integer> arr) {
+    // Write your code here
+    float pos = 0;
+    float neg = 0;
+    float zer = 0;
+    for(int i: arr)
+    {
+        if(i>0) pos++;
+        else if(i<0)neg++;
+        else zer++;
+    }
+    System.out.printf("%.6f", pos/arr.size());
+    System.out.println();
+    System.out.printf("%.6f", neg/arr.size());
+    System.out.println();
+    System.out.printf("%.6f", zer/arr.size());
+    System.out.println();
+    }
