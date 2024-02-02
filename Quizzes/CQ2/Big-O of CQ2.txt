@@ -1,0 +1,3 @@
+Big-O of Mini-Max Sum: O(n). This is because the most complex operation is the for loop iterating through all n integers in the array. Collections.sort is logarithmic, and assignment operations are constant.
+
+Big-O of Mars: O(n). This is because the code iterates through all n individual characters in the String S, and there is 2 conditionals, which are constant time.
