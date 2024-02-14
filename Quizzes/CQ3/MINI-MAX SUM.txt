@@ -1,0 +1,21 @@
+MINI-MAX SUM:
+
+ long min = 0;
+    long max = 0;
+    long num = 0;
+    
+    Collections.sort(arr);
+    
+    for(int i = 0; i <arr.size(); i++)
+    {
+        num += arr.get(i);
+    }
+    min = num - arr.get(arr.size() - 1);
+    max = num - arr.get(0);
+    
+    System.out.println(min + " " + max);
+    }
+
+Time Complexity: O(nlog(n)) because Collections.sort() has a time complexity of nlog(n), which is greater than the time complexity of the for loop and constant operations.
+
+Space Complexity: min, max, and num are all constant variables

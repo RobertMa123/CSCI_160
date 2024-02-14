@@ -1,0 +1,9 @@
+HackerrankInString:
+
+String hr = "hackerrank";
+    if (s.length() == 0){ return "YES"; }
+ 
+        if (s.charAt(s.length() - 1) == hr.charAt(hr.length() - 1)){
+              return hackerrankInString(s.substring(1));
+        } 
+        return "NO";
