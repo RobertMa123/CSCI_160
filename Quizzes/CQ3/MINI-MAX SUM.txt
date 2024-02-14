@@ -18,4 +18,4 @@ MINI-MAX SUM:
 
 Time Complexity: O(nlog(n)) because Collections.sort() has a time complexity of nlog(n), which is greater than the time complexity of the for loop and constant operations.
 
-Space Complexity: min, max, and num are all constant variables
+Space Complexity: min, max, and num are all constant variables, thus space complexity is O(1)
