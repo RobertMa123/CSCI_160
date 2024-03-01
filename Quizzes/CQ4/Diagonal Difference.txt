@@ -1,0 +1,14 @@
+Diagonal Difference:
+
+	int left_right = 0;
+        int right_left = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
+            left_right += arr.get(i).get(i);
+            right_left += arr.get(i).get(arr.size() - 1 - i);
+        }
+
+        return Math.abs(left_right - right_left);
+
+Time complexity: O(n) because the algorithm only goes through arr of size n once. Other operations are constant time
+Space complexity: Space complexity is O(c), where c is a constant amount of space reserved for int left_right, right_left
