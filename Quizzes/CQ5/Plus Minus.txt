@@ -1,0 +1,24 @@
+Plus Minus:
+
+double neg = 0;
+    double pos = 0;
+    double zer = 0;
+    for(int i = 0; i < arr.size(); i++)
+    {
+        if(arr.get(i) > 0){pos += 1;}
+        else if(arr.get(i) < 0){neg += 1;}
+        else{zer += 1;}
+    }
+    neg = neg/arr.size();
+    pos = pos/arr.size();
+    zer = zer/arr.size();
+    System.out.printf("%.6f",pos);
+    System.out.println();
+    System.out.printf("%.6f",neg);
+        System.out.println();
+
+    System.out.printf("%.6f",zer);
+        System.out.println();
+
+Time: O(n), because there is one for loop iterating through the entire arr of size n
+Space: O(c), where c is some constant, because space is reserved for 3 double variables.

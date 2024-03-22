@@ -1,0 +1,17 @@
+Modified Fibonacci:
+
+if (n == 0)
+    {
+        return t1;
+    }
+    else if (n == 1)
+    {
+        return t2;
+    }
+    else
+    {
+
+        return
+                    fibonacciModified( t1, t2, n - 1) +
+                    fibonacciModified( t1, t2, n - 2);
+    }
