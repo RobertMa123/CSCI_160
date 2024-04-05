@@ -1,0 +1,24 @@
+Insertion Sort pt2:
+
+for (int i = 1; i < arr.size(); i++) {
+            int e = arr.get(i);
+            int j = i - 1;
+            while (j >= 0 && arr.get(j) > e) {
+                arr.set(j + 1, arr.get(j));
+                j = j - 1;
+            }
+            arr.set(j + 1, e);
+            printArray(arr);
+        }
+
+public static void printArray(List<Integer> arr)
+    {
+        for(int i : arr)
+        {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+
+Time complexity: O(n^2) because in the worst case, the entire array needs to be rearranged.
+Space complexity: O(1) because a constant amount of space is needed for the auxilary int variables.

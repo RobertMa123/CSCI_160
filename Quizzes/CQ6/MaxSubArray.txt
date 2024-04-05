@@ -1,0 +1,87 @@
+MaxSubArray:
+
+Recursive:
+public static List<Integer> maxSubarray(List<Integer> arr) {
+    // Write your code here
+        int maxSumSubarray = maxSubarraySum(arr, arr.size() - 1);
+        int maxSumSubsequence = maxSubsequenceSum(arr, arr.size() - 1);
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(maxSumSubarray);
+        list.add(maxSumSubsequence);
+        System.out.println(maxSumSubarray + " " + maxSumSubsequence);
+        return list;
+    } 
+    
+    private static int maxEndingAtIndex(List<Integer> arr, int index) {
+        if (index == 0) {
+            return arr.get(0);
+        }
+
+        int maxEndingHere = Math.max(arr.get(index), arr.get(index) + maxEndingAtIndex(arr, index - 1));
+        return maxEndingHere;
+    }
+    
+    public static int maxSubarraySum(List<Integer> arr, int index) {
+         if (index == 0) {
+            return arr.get(0);
+        }
+        int maxEndingHere = maxEndingAtIndex(arr, index); 
+        int currentMax = maxSubarraySum(arr, index - 1); 
+        return Math.max(maxEndingHere, currentMax);
+    }
+
+    public static int maxSubsequenceSum(List<Integer> arr, int index) {
+        if (index == 0) {
+            return arr.get(0);
+        }
+
+        int include = arr.get(index) + Math.max(maxSubsequenceSum(arr, index - 1), 0);
+        int exclude = maxSubsequenceSum(arr, index - 1);
+        return Math.max(include, exclude);
+    }
+
+DP:
+
+ public static List<Integer> maxSubarray(List<Integer> arr) {
+    // Write your code here
+        int maxSumSubarray = maxSubarraySum(arr);
+        int maxSumSubsequence = maxSubsequenceSum(arr);
+
+        System.out.println(maxSumSubarray + " " + maxSumSubsequence);
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(maxSumSubarray);
+        list.add(maxSumSubsequence);
+        return list;
+    }
+     public static int maxSubarraySum(List<Integer> arr) {
+        int n = arr.size();
+        int end = arr.get(0);
+        int currentMax = arr.get(0);
+
+        for (int i = 1; i < n; i++) {
+            end = Math.max(arr.get(i), end + arr.get(i));
+            currentMax = Math.max(currentMax, end);
+        }
+
+        return currentMax;
+    }
+
+    public static int maxSubsequenceSum(List<Integer> arr) {
+        int n = arr.size();
+        int maxSum = 0;
+        int maxE = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            if (arr.get(i) > 0)
+                maxSum += arr.get(i);
+
+            if (arr.get(i) > maxE)
+                maxE = arr.get(i);
+        }
+
+        if (maxSum == 0)
+            return maxE;
+
+        return maxSum;
+    }
+    
