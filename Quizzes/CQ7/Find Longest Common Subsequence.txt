@@ -1,0 +1,93 @@
+Find Longest Common Subsequence:
+
+Recursive:
+
+    public static List<Integer> longestCommonSubsequence(List<Integer> a, List<Integer> b) {
+    // Write your code here
+     return LCSHelper(a, b, a.size(), b.size());
+
+    }
+     public static List<Integer> LCSHelper(List<Integer> a, List<Integer> b, int m, int n) {
+        if (m == 0 || n == 0) 
+	{
+            return new ArrayList<>();
+        }
+        
+        if (a.get(m - 1) == b.get(n - 1)) 
+	{
+            List<Integer> lcs = LCSHelper(a, b, m - 1, n - 1);
+            lcs.add(a.get(m - 1));
+            return lcs;
+        } 
+	else 
+	{
+            List<Integer> lcs1 = LCSHelper(a, b, m - 1, n);
+            List<Integer> lcs2 = LCSHelper(a, b, m, n - 1);
+            return lcs1.size() > lcs2.size() ? lcs1 : lcs2;
+        }
+    }
+
+Recursive Definition:
+	The original LCS function calls a helper function with the lists a,b and the sizes of those lists, m and n acting as an index. 
+Base case: When m = 0 or n = 0. This means we've traversed through the entire array a or b, and the longest common subsequence can not get longer.
+Recursion: Check if the elements at positions a.get(m - 1), b.get(n - 1) are equal.
+- If so, that means we found a common element. We move the index down by one and check the next pair recursively, and add those cases to a list lcs, which will be returned.
+- Otherwise, we create two separate lists, lcs1 and lcs2, both recursively called with either m - 1 or n - 1. The idea is to move one of the indexes down until we can find another common element. We return whichever list size ends up being longer.
+DP:
+
+  	int m = a.size();
+        int n = b.size();
+        int[][] LCST = new int[m + 1][n + 1];
+        List<Integer> lcs = new ArrayList<>();
+
+        for (int i = 0; i <= m; i++) 
+        {
+            for (int j = 0; j <= n; j++) 
+            {
+                if (i == 0 || j == 0) 
+                {
+                    LCST[i][j] = 0;
+                } 
+                else if (a.get(i - 1).equals(b.get(j - 1))) 
+                {
+                    LCST[i][j] = LCST[i - 1][j - 1] + 1;
+                } 
+                else 
+                {
+                    LCST[i][j] = Math.max(LCST[i - 1][j], LCST[i][j - 1]);
+                }
+            }
+        }
+        
+        int i = m, j = n;
+        while (i > 0 && j > 0) {
+            if (a.get(i - 1).equals(b.get(j - 1))) {
+                lcs.add(a.get(i - 1));
+                i--;
+                j--;
+            } else if (LCST[i - 1][j] > LCST[i][j - 1]) {
+                i--;
+            } else {
+                j--;
+            }
+        }
+        
+        Collections.reverse(lcs);
+        return lcs;
+
+Recursive Definition:
+	The table LCST is initialized to the sizes of a and b.
+Base case: i = 0 or j = 0. Similar to the recursive solution, this means it's an empty list.
+The table will look like this:
+
+i,j 0 0 0 0 ... n + 1
+0
+0
+0
+0
+...
+m + 1
+Recursion: we check if a.get(i - 1) equals b.get(j - 1), 
+- If so, that means we found a common element. Then, we refer back to a previous solution.
+- Otherwise, we find the max between LCST[i - 1][j] and LCST[i][j - 1], similar to the recursive solution. Max is assigned to LCST[i][j]
+We then add the elements to a list lcs, and reverse its order to return the final solution.

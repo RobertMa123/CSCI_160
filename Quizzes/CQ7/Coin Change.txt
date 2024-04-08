@@ -1,0 +1,13 @@
+Coin Change
+
+long[] ways = new long[n + 1];
+    ways[0] = 1;
+     for (long d : c) {
+            for (int i = (int)d; i <= n; i++) {
+                ways[i] += ways[i - (int)d];
+            }
+        }
+        return ways[n];
+    
+Time Complexity: O(d * n) where d is the size of denominations available (e.g. c = {1,2,3}, d = |c| = 3), and n is the size of the array of coin values.
+Space Complexity: O(n) because we have an array ways that takes n amount of auxilary space for the coin values.
