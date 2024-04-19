@@ -1,0 +1,31 @@
+shortestPath(a, queries):
+	rowChanges <- {-1,0,1,0}
+	colChanges <- {0,1,0,-1}
+	visited <- bool[n][m] //keep track of visited cells
+	dist <- int[n][m] //store dist from one cell to another
+	pq = PriorityQueue<Cell>() //priority queue to store cells
+	pq.Insert((r1,c1)) //insert first cell into pq
+
+	for i <- 0 to n-1:
+		for j <- 0 to m-1:
+			dist[i][j] <- \infinity //set all dist to max
+	
+	while pq !empty: //iterate over all cells
+		cell < pq.poll() //get cell with min weight
+		if visited[cell.row,cell.col]: //check if we've visited this cell before
+			continue
+		visited[row][col] = true
+		
+		for i <- 0 to 3: //explore all neighboring cells
+			nRow = row + rowChanges[i]
+			nCol = col + colChanges[i]
+			
+			if nRow >= 0 and nRow < n and nCol >= 0 and nCol < m and !visited[nRow,nCol]:
+				newDist = dist[row,col] + a[nRow, nCol]//new dist
+				if newDisst < dist[nRow,nCol]:
+					dist[nRow,nCol] = newDist
+					pq.Insert((nRow,nCol)) //insert new cell
+	return dist[r2,c2]
+
+
+Time complexity: O(nmlog(nm)), since the initialization takes O(nm) and polling a priority queue takes O(log(nm)) time
